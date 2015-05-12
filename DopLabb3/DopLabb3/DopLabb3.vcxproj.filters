@@ -36,6 +36,9 @@
     <ClCompile Include="source\base\intexpinterp\scanadt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\dop-lab3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\base\mfl\env.h">
@@ -53,22 +56,7 @@
     <ClInclude Include="source\base\pclibs\exception.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\base\pclibs\extgraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\base\pclibs\gcalloc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\base\pclibs\genlib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\base\pclibs\graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\base\pclibs\mazelib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\base\pclibs\random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\base\pclibs\simpio.h">

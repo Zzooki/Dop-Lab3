@@ -95,6 +95,7 @@
     <ClCompile Include="source\base\mfl\env.c" />
     <ClCompile Include="source\base\mfl\exp.c" />
     <ClCompile Include="source\base\mfl\value.c" />
+    <ClCompile Include="source\dop-lab3.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\base\intexpinterp\scanadt.h" />
@@ -106,12 +107,7 @@
     <ClInclude Include="source\base\mfl\print.h" />
     <ClInclude Include="source\base\mfl\value.h" />
     <ClInclude Include="source\base\pclibs\exception.h" />
-    <ClInclude Include="source\base\pclibs\extgraph.h" />
-    <ClInclude Include="source\base\pclibs\gcalloc.h" />
     <ClInclude Include="source\base\pclibs\genlib.h" />
-    <ClInclude Include="source\base\pclibs\graphics.h" />
-    <ClInclude Include="source\base\pclibs\mazelib.h" />
-    <ClInclude Include="source\base\pclibs\random.h" />
     <ClInclude Include="source\base\pclibs\simpio.h" />
     <ClInclude Include="source\base\pclibs\strlib.h" />
   </ItemGroup>
