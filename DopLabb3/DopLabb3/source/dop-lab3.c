@@ -3,10 +3,11 @@
 #include <stdio.h>
 
 main() {
-    expADT exp = NewIntegerExp(5);
+    expADT lhs = NewIntegerExp(5);
+    expADT rhs = NewIntegerExp(9);
+    expADT ifPart = NewCompoundExp('=', NewIdentifierExp("snabel"), NewIntegerExp(1337));
+    expADT ifExp = NewIfExp(lhs, '=', rhs, ifPart, NULL);
 
-
-
-    PrintExp(exp);
+    PrintExp(ifExp);
     system("pause");
 }
