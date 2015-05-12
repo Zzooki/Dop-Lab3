@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -20,12 +20,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -74,6 +76,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="bin\Interp.exe" />
+    <None Include="bin\MFLinterpretor.exe" />
+    <None Include="bin\test.mfl" />
+    <None Include="docs\Lab3_DoP_MFL_2015.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\base\intexpinterp\eval.c" />
+    <ClCompile Include="source\base\intexpinterp\exp.c" />
+    <ClCompile Include="source\base\intexpinterp\interp.c" />
+    <ClCompile Include="source\base\intexpinterp\parser.c" />
+    <ClCompile Include="source\base\intexpinterp\scanadt.c" />
+    <ClCompile Include="source\base\intexpinterp\symtab.c" />
+    <ClCompile Include="source\base\mfl\env.c" />
+    <ClCompile Include="source\base\mfl\exp.c" />
+    <ClCompile Include="source\base\mfl\value.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\base\intexpinterp\eval.h" />
+    <ClInclude Include="source\base\intexpinterp\exp.h" />
+    <ClInclude Include="source\base\intexpinterp\parser.h" />
+    <ClInclude Include="source\base\intexpinterp\scanadt.h" />
+    <ClInclude Include="source\base\intexpinterp\symtab.h" />
+    <ClInclude Include="source\base\mfl\env.h" />
+    <ClInclude Include="source\base\mfl\eval.h" />
+    <ClInclude Include="source\base\mfl\exp.h" />
+    <ClInclude Include="source\base\mfl\parser.h" />
+    <ClInclude Include="source\base\mfl\print.h" />
+    <ClInclude Include="source\base\mfl\value.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

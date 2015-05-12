@@ -14,4 +14,74 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\test.mfl" />
+    <None Include="bin\Interp.exe" />
+    <None Include="bin\MFLinterpretor.exe" />
+    <None Include="docs\Lab3_DoP_MFL_2015.pdf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\base\intexpinterp\eval.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\intexpinterp\exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\intexpinterp\interp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\intexpinterp\parser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\intexpinterp\scanadt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\intexpinterp\symtab.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\mfl\env.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\mfl\exp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\base\mfl\value.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\base\intexpinterp\eval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\intexpinterp\exp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\intexpinterp\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\intexpinterp\scanadt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\intexpinterp\symtab.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\env.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\eval.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\exp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\print.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\base\mfl\value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
