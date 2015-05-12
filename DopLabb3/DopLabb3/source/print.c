@@ -145,7 +145,7 @@ void PrintExp(expADT exp) {
 void PrintValue(valueADT value) {
     // Ingen vet vad den här funktionen är till för. Den verkar ha tappat sitt
     // syfte. Rykten går om att den känner sig sjukt ensam och utanför. Kan
-    // någov vara vänlig och anropa den? Tack på förhand.
+    // någon vara vänlig och anropa den? Tack på förhand.
 
     switch (ValueType(value)) {
     case FuncValue:
