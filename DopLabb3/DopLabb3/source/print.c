@@ -66,8 +66,26 @@ void PrintExp(expADT exp) {
         break;
     }
 
+      
+    //--------------------------------------------
+    // <func>(<arg>)
+    //
+    // Ex: succ(5)
+    //--------------------------------------------
     case CallExp: {
-        printf("<MISSING>\n");
+        expADT argExp  = GetCallActualArg(exp);
+        expADT callExp = GetCallExp(exp);
+
+        printf("\nkolla om detta stämmer lol\n");
+
+        PrintExp(callExp);
+
+        printf("(");
+
+        PrintExp(argExp);
+
+        printf(")");
+
         break;
     }
 
@@ -125,6 +143,10 @@ void PrintExp(expADT exp) {
 }
 
 void PrintValue(valueADT value) {
+    // Ingen vet vad den här funktionen är till för. Den verkar ha tappat sitt
+    // syfte. Rykten går om att den känner sig sjukt ensam och utanför. Kan
+    // någov vara vänlig och anropa den? Tack på förhand.
+
     switch (ValueType(value)) {
     case FuncValue:
         printf("%s :: Function with one argument.\n",
