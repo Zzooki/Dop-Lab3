@@ -9,5 +9,6 @@ main() {
     expADT ifExp = NewIfExp(lhs, '=', rhs, ifPart, NULL);
 
     PrintExp(ifExp);
+    printf("\n\n");
     system("pause");
 }
