@@ -10,6 +10,8 @@
 // FUNCTIONS
 //------------------------------------------------
 
+// Skriver ut ett uttrycktsträd till källkod. Vi kan använda funktionen för att
+// verifiera att parsning fungerar korrekt.
 void PrintExp(expADT exp) {
     exptypeT expType = ExpType(exp);
 
@@ -82,7 +84,7 @@ void PrintExp(expADT exp) {
     //--------------------------------------------
     case CallExp: {
         expADT argExp  = GetCallActualArg(exp);
-        expADT callExp = GetCallExp(exp);
+        expADT callExp = GetCallExp      (exp);
 
         printf("\nkolla om detta stämmer lol\n");
 
@@ -134,8 +136,8 @@ void PrintExp(expADT exp) {
     //--------------------------------------------
     case CompoundExp: {
         char   op     = ExpOperator(exp);
-        expADT lhsExp = ExpLHS(exp);
-        expADT rhsExp = ExpRHS(exp);
+        expADT lhsExp = ExpLHS     (exp);
+        expADT rhsExp = ExpRHS     (exp);
 
         PrintExp(lhsExp);
 
