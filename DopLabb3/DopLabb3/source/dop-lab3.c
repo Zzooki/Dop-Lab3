@@ -1,5 +1,12 @@
+#include "exp.h"
+
 #include <stdio.h>
 
 main() {
-    printf("WOHOO!!!\n");
+    expADT exp = NewIntegerExp(5);
+
+
+
+    PrintExp(exp);
+    system("pause");
 }

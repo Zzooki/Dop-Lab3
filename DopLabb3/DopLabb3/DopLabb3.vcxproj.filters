@@ -30,13 +30,16 @@
     <ClCompile Include="source\base\mfl\value.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\dop-lab3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="source\base\intexpinterp\symtab.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\base\intexpinterp\scanadt.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\dop-lab3.c">
+    <ClCompile Include="source\print.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
