@@ -41,9 +41,17 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>bin\$(Configuration)\tmp\</IntDir>
+    <IncludePath>$(ProjectDir)\source\base\intexpinterp\;$(ProjectDir)\source\base\mfl\;$(ProjectDir)\source\base\pclibs\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\bin\$(Configuration)\</OutDir>
+    <IntDir>bin\$(Configuration)\tmp\</IntDir>
+    <IncludePath>$(ProjectDir)\source\base\intexpinterp\;$(ProjectDir)\source\base\mfl\;$(ProjectDir)\source\base\pclibs\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\lib\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -82,10 +90,6 @@
     <None Include="docs\Lab3_DoP_MFL_2015.pdf" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\base\intexpinterp\eval.c" />
-    <ClCompile Include="source\base\intexpinterp\exp.c" />
-    <ClCompile Include="source\base\intexpinterp\interp.c" />
-    <ClCompile Include="source\base\intexpinterp\parser.c" />
     <ClCompile Include="source\base\intexpinterp\scanadt.c" />
     <ClCompile Include="source\base\intexpinterp\symtab.c" />
     <ClCompile Include="source\base\mfl\env.c" />
@@ -93,9 +97,6 @@
     <ClCompile Include="source\base\mfl\value.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\base\intexpinterp\eval.h" />
-    <ClInclude Include="source\base\intexpinterp\exp.h" />
-    <ClInclude Include="source\base\intexpinterp\parser.h" />
     <ClInclude Include="source\base\intexpinterp\scanadt.h" />
     <ClInclude Include="source\base\intexpinterp\symtab.h" />
     <ClInclude Include="source\base\mfl\env.h" />
@@ -104,6 +105,18 @@
     <ClInclude Include="source\base\mfl\parser.h" />
     <ClInclude Include="source\base\mfl\print.h" />
     <ClInclude Include="source\base\mfl\value.h" />
+    <ClInclude Include="source\base\pclibs\exception.h" />
+    <ClInclude Include="source\base\pclibs\extgraph.h" />
+    <ClInclude Include="source\base\pclibs\gcalloc.h" />
+    <ClInclude Include="source\base\pclibs\genlib.h" />
+    <ClInclude Include="source\base\pclibs\graphics.h" />
+    <ClInclude Include="source\base\pclibs\mazelib.h" />
+    <ClInclude Include="source\base\pclibs\random.h" />
+    <ClInclude Include="source\base\pclibs\simpio.h" />
+    <ClInclude Include="source\base\pclibs\strlib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\PCLibs2012.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
