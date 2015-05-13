@@ -85,6 +85,8 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\PCLibs2012.lib" />
+    <Library Include="lib\PCLibs2012.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
   </ItemGroup>
 </Project>

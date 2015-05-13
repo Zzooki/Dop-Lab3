@@ -25,9 +25,32 @@ expADT ReadC(scannerADT scanner) {
 }
 
 expADT ReadT(scannerADT scanner) {
-    expADT exp = ReadC(scanner);
+	/*
+	Anropa ReadT. Om ingen T existerar anropas funktionen Error. Om en C existerar
+	sparas motsvarande expADT.*/
+	expADT exp = ReadC(scanner);
+	string token = ReadToken(scanner);
 
-    return exp;
+	if (StringEqual(token, '*')){
+		return NewCompoundExp('*', exp, ReadT(scanner));
+	}
+	if (StringEqual(token, '/')){
+		return NewCompoundExp('/', exp, ReadT(scanner));
+	}
+	else SaveToken(scanner, token);
+
+	return(exp);
+	 /*
+	Om något finns kvar i scannern läs in nästa token från scannern och avgör om det är
+	"*" eller "/". Om inte, lägg tillbaka inläst token till scannern och returnera den
+	sparade expADT för C. Anropande funktion tar hand om det som återstår i scannern.
+	Om "*" eller "/" återfanns, anropa ReadT rekursivt för att läsa denna, bygg upp
+	motsvarande expADT med hjälp av T och den sparade C och returnera detta.*/
+
+	/*
+	Kontrollera om det finns någonting kvar i scannern. Om inte, returnera den sparade
+	expADT för C.*/
+ 
 }
 
 expADT ReadE(scannerADT scanner) {
