@@ -34,6 +34,7 @@ expADT ReadT(scannerADT scanner) {
 	if (StringEqual(token, '*')){
 		if (MoreTokensExist){
 			return NewCompoundExp('*', exp, ReadT(scanner));
+
 		}
 		else Error("Invalid Expression!");		
 	}
