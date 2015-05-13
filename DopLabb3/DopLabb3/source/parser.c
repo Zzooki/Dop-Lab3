@@ -31,7 +31,33 @@ expADT ReadT(scannerADT scanner) {
 }
 
 expADT ReadE(scannerADT scanner) {
-    expADT exp = ReadT(scanner);
+    expADT exp;
+    expADT lhs   = ReadT    (scanner);
+    string token = ReadToken(scanner);
+
+    //--------
+    // T + E
+    //--------
+    if (StringEqual(token, "+")) {
+        expADT rhs = ReadE(scanner);
+        exp = NewCompoundExp('+', lhs, rhs);
+    }
+
+    //--------
+    // T - E
+    //--------
+    else if (StringEqual(token, "-")) {
+        expADT rhs = ReadE(scanner);
+        exp = NewCompoundExp('+', lhs, rhs);
+    }
+
+    //--------
+    // T
+    //--------
+    else {
+        SaveToken(scanner, token);
+        exp = lhs;
+    }
 
     return exp;
 }
