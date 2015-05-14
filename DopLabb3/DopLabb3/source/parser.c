@@ -31,15 +31,15 @@ expADT ReadT(scannerADT scanner) {
 	expADT exp = ReadC(scanner);
 	string token = ReadToken(scanner);
 
-	if (StringEqual(token, '*')){
-		if (MoreTokensExist){
+	if (StringEqual(token, "*")){
+		if (MoreTokensExist(scanner)){
 			return NewCompoundExp('*', exp, ReadT(scanner));
 
 		}
 		else Error("Invalid Expression!");		
 	}
-	if (StringEqual(token, '/')){
-		if (MoreTokensExist){
+	if (StringEqual(token, "/")){
+		if (MoreTokensExist(scanner)){
 			return NewCompoundExp('/', exp, ReadT(scanner));
 		}
 		else Error("Invalid Expression!");
@@ -68,7 +68,7 @@ expADT ReadE(scannerADT scanner) {
     // T + E
     //--------
 	if (StringEqual(token, "+")){
-		if (MoreTokensExist){
+		if (MoreTokensExist(scanner)){
 			return NewCompoundExp('+', exp, ReadE(scanner));
 		}
 		else Error("Invalid Expression!");
@@ -77,7 +77,7 @@ expADT ReadE(scannerADT scanner) {
     // T - E
     //--------
 	else if (StringEqual(token, "-")){
-		if (MoreTokensExist){
+		if (MoreTokensExist(scanner)){
 			return NewCompoundExp('-', exp, ReadE(scanner));
 		}
 		else Error("Invalid Expression!");
