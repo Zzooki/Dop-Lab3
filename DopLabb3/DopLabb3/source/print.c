@@ -156,6 +156,7 @@ void PrintValue(valueADT value) {
     // Ingen vet vad den här funktionen är till för. Den verkar ha tappat sitt
     // syfte. Rykten går om att den känner sig sjukt ensam och utanför. Kan
     // någon vara vänlig och anropa den? Tack på förhand.
+	// Haha söt kommentar! 
 
     switch (ValueType(value)) {
     case FuncValue:

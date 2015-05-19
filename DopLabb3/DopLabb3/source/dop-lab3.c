@@ -12,7 +12,7 @@ main() {
     PrintExp(ifExp);*/
 
     scannerADT scanner = NewScanner();
-    SetScannerString(scanner, "2+1337+9+9-9+9");
+    SetScannerString(scanner, "mul(9)hjhg");
     expADT exp = ParseExp(scanner);
     PrintExp(exp);
     FreeScanner(scanner);
