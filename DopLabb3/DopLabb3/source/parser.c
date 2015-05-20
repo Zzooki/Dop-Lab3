@@ -12,6 +12,44 @@
 
 expADT ReadF(scannerADT scanner) {
     string token = ReadToken(scanner);
+	char relOp;
+	expADT elsePart, ifPart;
+
+	if (StringEqual(token, "(")){
+		expADT arg = ReadE(scanner);
+		token = ReadToken(scanner);
+		if (!StringEqual(token, ")"))
+			Error("Syntax fel!");
+		return(arg);
+	}
+	if (StringEqual(ConvertToLowerCase(token), "if")){
+		expADT lhs = ReadE(scanner);
+		token = ReadToken(scanner);
+		if (StringEqual(token, "="))
+			relOp = '=';
+		if (StringEqual(token, "<"))
+			relOp = '<';
+		if (StringEqual(token, ">"))
+			relOp = '>';
+		else
+			Error("Either ==, =< or =>");
+		expADT rhs = ReadE(scanner);
+		token = ReadToken(scanner);
+		if (StringEqual(token, "then")){
+			ifPart = ReadE(scanner);
+		}
+		else Error("Then?");
+		token = ReadToken(scanner);
+		if (StringEqual(token, "else")){
+			elsePart = ReadE(scanner);
+		}
+		else{
+			SaveToken(scanner, token); 
+			elsePart = NULL;
+		}
+		return(NewIfExp(lhs, relOp, rhs, ifPart, elsePart));
+			
+	}
 
 	if (isdigit(token[0]))
 		return NewIdentifierExp(token);
