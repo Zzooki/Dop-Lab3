@@ -57,7 +57,7 @@ expADT ReadF(scannerADT scanner) {
 			
 	}
 
-	if (isdigit(token[0]))
+	if (!isdigit(token[0]))
 		return NewIdentifierExp(token);
 
     int intVal = StringToInteger(token);
