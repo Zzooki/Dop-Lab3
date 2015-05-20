@@ -11,7 +11,6 @@ main() {
 
     while (TRUE) {
         printf("\n> ");
-        // 1. Läs in en sträng/ett kommando.
         string s = GetLine();
 
         if (StringLength(s)==0)
