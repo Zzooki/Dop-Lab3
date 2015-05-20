@@ -93,10 +93,10 @@
     <ClCompile Include="source\base\intexpinterp\scanadt.c" />
     <ClCompile Include="source\base\intexpinterp\symtab.c" />
     <ClCompile Include="source\base\mfl\env.c" />
-    <ClCompile Include="source\base\mfl\eval.c" />
     <ClCompile Include="source\base\mfl\exp.c" />
     <ClCompile Include="source\base\mfl\value.c" />
     <ClCompile Include="source\dop-lab3.c" />
+    <ClCompile Include="source\eval.c" />
     <ClCompile Include="source\parser.c" />
     <ClCompile Include="source\print.c" />
   </ItemGroup>

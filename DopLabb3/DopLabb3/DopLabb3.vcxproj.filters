@@ -45,7 +45,10 @@
     <ClCompile Include="source\parser.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\base\mfl\eval.c">
+    <ClCompile Include="source\eval.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\eval.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

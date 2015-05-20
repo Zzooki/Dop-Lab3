@@ -1,6 +1,8 @@
 #include "exception.h"
+#include "eval.h"
 #include "exp.h"
 #include "parser.h"
+#include "print.h"
 #include "simpio.h"
 #include "strlib.h"
 
@@ -8,6 +10,8 @@
 
 main() {
     scannerADT scanner = NewScanner();
+    SetScannerSpaceOption(scanner, IgnoreSpaces);
+    environmentADT globalEnv = NewEnvironment();
 
     while (TRUE) {
         printf("\n> ");
@@ -33,6 +37,10 @@ main() {
 
         if (exp)
             PrintExp(exp);
+
+        printf("\n");
+
+        PrintValue(Eval(exp, globalEnv));
 
         free(s);
     }
