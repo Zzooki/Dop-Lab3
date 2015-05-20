@@ -13,7 +13,7 @@
 
 /* Private function prototypes */
 
-static valueADT EvalCompound(expADT exp);
+static valueADT EvalCompound(expADT exp, environmentADT env);
 
 /* Exported entries */
 
@@ -31,19 +31,43 @@ valueADT Eval(expADT exp, environmentADT env)
 
     switch (ExpType(exp)) {
     case IfExp: {
+        expADT lhs = GetIfLHSExpression(exp);
+        expADT rhs = GetIfRHSExpression(exp);
+        char relOp = GetIfRelOp(exp);
+        expADT ifPart = GetIfThenPart(exp);
+        expADT elsePart = GetIfElsePart(exp);
 
+        valueADT val1 = Eval(lhs, env);
+        valueADT val2 = Eval(rhs, env);
+
+        if (relOp == '=') {
+            if (GetIntValue(val1) == GetIntValue(val2))
+                return Eval(ifPart, env);
+            return Eval(elsePart, env);
+        }
+        else if (relOp == '<') {
+            if (GetIntValue(val1) < GetIntValue(val2))
+                return Eval(ifPart, env);
+            return Eval(elsePart, env);
+        }
+        else if (relOp == '>') {
+            if (GetIntValue(val1) > GetIntValue(val2))
+                return Eval(ifPart, env);
+            return Eval(elsePart, env);
+        }
     }
 
     case FuncExp: {
         // fasen gör man nu då
+        break;
     }
 
     case ConstExp: {
-        return NewIntegerValue(ExpInteger(exp, env));
+        return NewIntegerValue(ExpInteger(exp));
     }
 
     case IdentifierExp: {
-        return (GetIdentifierValue(env, ExpIdentifier(exp, env)));
+        return (GetIdentifierValue(env, ExpIdentifier(exp)));
 
     }
 
@@ -52,6 +76,8 @@ valueADT Eval(expADT exp, environmentADT env)
 
     }
     }
+
+    return NULL;
 }
 
 

@@ -35,12 +35,14 @@ main() {
             printf("Error: %s\n", (string)GetExceptionValue());
         } endtry;
 
-        if (exp)
+        if (exp) {
             PrintExp(exp);
+            printf("\n");
+            valueADT val = Eval(exp, globalEnv);
+            if (val)
+                PrintValue(val);
 
-        printf("\n");
-
-        PrintValue(Eval(exp, globalEnv));
+        }
 
         free(s);
     }
