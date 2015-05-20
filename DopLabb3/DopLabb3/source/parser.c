@@ -20,6 +20,7 @@ expADT ReadF(scannerADT scanner) {
     string token = ReadToken(scanner);
 	char relOp;
 	expADT elsePart, ifPart;
+	string identifier;
 
 	if (StringEqual(token, "(")){
 		expADT arg = ReadE(scanner);
@@ -33,20 +34,20 @@ expADT ReadF(scannerADT scanner) {
 		token = ReadToken(scanner);
 		if (StringEqual(token, "="))
 			relOp = '=';
-		if (StringEqual(token, "<"))
-			relOp = '<';
-		if (StringEqual(token, ">"))
+		else if (StringEqual(token, "<"))
+				relOp = '<';
+		else if(StringEqual(token, ">"))
 			relOp = '>';
 		else
-			Error("Either ==, =< or =>");
+			Error("Either =, < or >");
 		expADT rhs = ReadE(scanner);
 		token = ReadToken(scanner);
-		if (StringEqual(token, "then")){
+		if (StringEqual(ConvertToLowerCase(token), "then")){
 			ifPart = ReadE(scanner);
 		}
 		else Error("Then?");
 		token = ReadToken(scanner);
-		if (StringEqual(token, "else")){
+		if (StringEqual(ConvertToLowerCase(token), "else")){
 			elsePart = ReadE(scanner);
 		}
 		else{
@@ -55,6 +56,25 @@ expADT ReadF(scannerADT scanner) {
 		}
 		return(NewIfExp(lhs, relOp, rhs, ifPart, elsePart));
 			
+	}
+	if (StringEqual(ConvertToLowerCase(token)), "func"){
+		token = ReadToken(scanner);
+		if (StringEqual(token, "(")){
+			identifier = ReadToken(scanner);
+			token = ReadToken(scanner);
+			if (!StringEqual(token, ")")) 
+				Error("Syntax fel!");
+			token = ReadToken(scanner);
+			if (StringEqual(token), "{"){
+				expADT body = ReadE(scanner);
+				token = ReadToken(scanner);
+				if (!StringEqual(token), "}")
+					Error("Missing }!");
+				return(NewFuncExp(identifier, body));
+			}
+			else Error("Missing {!");
+		}
+		else Error("Missing (!");
 	}
 
 	if (!isdigit(token[0]))
