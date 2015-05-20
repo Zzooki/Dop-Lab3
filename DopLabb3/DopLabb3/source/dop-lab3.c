@@ -25,7 +25,7 @@ main() {
 
         expADT exp = NULL;
         try {
-        exp = ParseExp(scanner);
+            exp = ParseExp(scanner);
 
         except(ANY)
             printf("Error: %s\n", (string)GetExceptionValue());
