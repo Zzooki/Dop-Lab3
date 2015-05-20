@@ -6,6 +6,12 @@
 #include "parser.h"
 #include "strlib.h"
 
+expADT ParseExp(scannerADT scanner);
+expADT ReadE(scannerADT scanner);
+expADT ReadT(scannerADT scanner);
+expADT ReadC(scannerADT scanner);
+expADT ReadF(scannerADT scanner);
+
 //------------------------------------------------
 // FUNCTIONS
 //------------------------------------------------
