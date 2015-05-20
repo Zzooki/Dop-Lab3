@@ -1,22 +1,44 @@
+#include "exception.h"
 #include "exp.h"
 #include "parser.h"
+#include "simpio.h"
+#include "strlib.h"
 
 #include <stdio.h>
 
 main() {
-    /*expADT lhs = NewIntegerExp(5);
-    expADT rhs = NewIntegerExp(9);
-    expADT ifPart = NewCompoundExp('=', NewIdentifierExp("snabel"), NewIntegerExp(1337));
-    expADT ifExp = NewIfExp(lhs, '=', rhs, ifPart, NULL);
-
-    PrintExp(ifExp);*/
-
     scannerADT scanner = NewScanner();
-    SetScannerString(scanner, "mul(9)hjhg");
-    expADT exp = ParseExp(scanner);
-    PrintExp(exp);
+
+    while (TRUE) {
+        printf("\n> ");
+        // 1. Läs in en sträng/ett kommando.
+        string s = GetLine();
+
+        if (StringLength(s)==0)
+            continue;
+
+        if (s[0] == ':') {
+            // Det är ett kommando, hantera det här.
+            continue;
+        }
+
+        SetScannerString(scanner, s);
+
+        expADT exp = NULL;
+        try {
+        exp = ParseExp(scanner);
+
+        except(ANY)
+            printf("Error: %s\n", (string)GetExceptionValue());
+        } endtry;
+
+        if (exp)
+            PrintExp(exp);
+
+        free(s);
+    }
+
     FreeScanner(scanner);
 
-    printf("\n\n");
     system("pause");
 }
