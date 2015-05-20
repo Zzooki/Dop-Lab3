@@ -51,13 +51,13 @@ expADT ReadF(scannerADT scanner) {
 			elsePart = ReadE(scanner);
 		}
 		else{
-			SaveToken(scanner, token); 
-			elsePart = NULL;
+			Error("Missing else!!");
+			
 		}
 		return(NewIfExp(lhs, relOp, rhs, ifPart, elsePart));
 			
 	}
-	if (StringEqual(ConvertToLowerCase(token)), "func"){
+	if (StringEqual(ConvertToLowerCase(token), "func")){
 		token = ReadToken(scanner);
 		if (StringEqual(token, "(")){
 			identifier = ReadToken(scanner);
@@ -65,10 +65,10 @@ expADT ReadF(scannerADT scanner) {
 			if (!StringEqual(token, ")")) 
 				Error("Syntax fel!");
 			token = ReadToken(scanner);
-			if (StringEqual(token), "{"){
+			if (StringEqual(token, "{")){
 				expADT body = ReadE(scanner);
 				token = ReadToken(scanner);
-				if (!StringEqual(token), "}")
+				if (!StringEqual(token, "}"))
 					Error("Missing }!");
 				return(NewFuncExp(identifier, body));
 			}
