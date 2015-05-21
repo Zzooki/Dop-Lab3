@@ -57,9 +57,23 @@ valueADT Eval(expADT exp, environmentADT env)
         }
     }
 
+    case CallExp: {
+        valueADT       arg      = Eval(GetCallActualArg(exp), env);
+        expADT         call     = GetCallExp(exp);
+        string         funcName = ExpIdentifier(call);
+        valueADT       func     = GetIdentifierValue(env, funcName);
+        expADT         funcExp  = GetFuncValueBody(func);
+        expADT         funcBody = GetFuncBody(funcExp);
+        environmentADT closure  = GetFuncValueClosure(func);
+
+        DefineIdentifier(env, "n", NewIntegerExp(9), closure);
+
+        return Eval(funcBody, closure);
+
+    }
+
     case FuncExp: {
-        // fasen gör man nu då
-        break;
+        return NewFuncValue(GetFuncFormalArg(exp), GetFuncBody(exp), NewClosure(env));
     }
 
     case ConstExp: {
@@ -98,11 +112,20 @@ static valueADT EvalCompound(expADT exp, environmentADT env) {
     lhs = Eval(ExpLHS(exp), env);
     rhs = Eval(ExpRHS(exp), env);
 
+    int lhv, rhv;
+
+    if (ValueType(lhs) == IntValue) lhv = GetIntValue(lhs);
+    else {
+
+    }
+
+    if (ValueType(rhs) == IntValue) rhv = GetIntValue(rhs);
+
     switch (op) {
-      case '+': return NewIntegerValue(GetIntValue(lhs) + GetIntValue(rhs));
-      case '-': return NewIntegerValue(GetIntValue(lhs) - GetIntValue(rhs));
-      case '*': return NewIntegerValue(GetIntValue(lhs) * GetIntValue(rhs));
-      case '/': return NewIntegerValue(GetIntValue(lhs) / GetIntValue(rhs));
+      case '+': return NewIntegerValue(lhv + rhv);
+      case '-': return NewIntegerValue(lhv - rhv);
+      case '*': return NewIntegerValue(lhv * rhv);
+      case '/': return NewIntegerValue(lhv / rhv);
       default:  Error("Illegal operator");
     }
 }

@@ -13,6 +13,12 @@ main() {
     SetScannerSpaceOption(scanner, IgnoreSpaces);
     environmentADT globalEnv = NewEnvironment();
 
+    string swag = "func (n) { 10*n }";
+    SetScannerString(scanner, swag);
+    expADT swagExp = ParseExp(scanner);
+    DefineIdentifier(globalEnv, "swag", swagExp, globalEnv);
+
+
     while (TRUE) {
         printf("\n> ");
         string s = GetLine();
