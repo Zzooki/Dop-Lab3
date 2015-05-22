@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 
-typedef void(*commandFnT)(void);
+typedef void(*commandFnT)(string);
 typedef struct{
 	commandFnT fn;
 }*commandEntryT;
@@ -97,29 +97,41 @@ void defineCommand(string cmd, commandFnT fn){
 void executeCommand(string cmd){
 	commandEntryT entry;
 
+    string arg = cmd;
+    for (int i = 0; i < strlen(cmd); i++) {
+        char c = cmd[i];
+        if (c == ' ') {
+            cmd[i] = '\0';
+            arg = cmd + i +1;
+            break;
+        }
+    }
+
 	entry = Lookup(commandTable, cmd);
 	if (entry == UNDEFINED){
 		printf("Undefined command: %s\n", cmd);
 		return;
 	}
-	entry->fn();
+
+	entry->fn(arg);
 }
-void loadCmd(void){
-	printf("load");
+void loadCmd(string s) {
+    // :load hej.mfl
+	printf("%s\n", s);
 }
-void defineCmd(void){
+void defineCmd(string s) {
 	printf("define");
 }
-void helpCmd(void){
+void helpCmd(string s) {
 	printf("The available commands are:\n:load\n:define\n:type\n:quit\n:swag");
 }
-void quitCmd(void){
+void quitCmd(string s) {
 	exit(EXIT_SUCCESS);
 }
 
-void swagCmd(void){
+void swagCmd(string s) {
 	printf("swag");
 }
-void typeCmd(void){
+void typeCmd(string s){
 	printf("type");
 }
