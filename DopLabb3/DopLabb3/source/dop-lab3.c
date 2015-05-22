@@ -119,11 +119,17 @@ void executeCommand(string cmd){
 	entry->fn(arg);
 }
 void loadCmd(string s) {
-    // :load hej.mfl
-	printf("%s\n", s);
+	FILE *newfile;
+	string expression;
+	newfile = fopen(s, "r");
+	if (newfile = NULL) Error("Cannot find file, please swag it again!\n");
+	while (expression = ReadLine(newfile != EOF))
+	{
+		if (!expression[0] == '#') defineCmd(expression);
+	}
 }
 void defineCmd(string s) {
-	printf("define");
+	
 }
 void helpCmd(string s) {
 	printf("The available commands are:\n:load\n:define\n:type\n:quit\n:swag");
