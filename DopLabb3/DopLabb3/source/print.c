@@ -86,8 +86,6 @@ void PrintExp(expADT exp) {
         expADT argExp  = GetCallActualArg(exp);
         expADT callExp = GetCallExp      (exp);
 
-        printf("\nkolla om detta stämmer lol\n");
-
         PrintExp(callExp);
 
         printf("(");
@@ -160,11 +158,10 @@ void PrintValue(valueADT value) {
 
     switch (ValueType(value)) {
     case FuncValue:
-        printf("%s :: Function with one argument.\n",
-               GetFuncValueFormalArg(value));
+        printf("Function with one argument.\n");
         break;
     case IntValue:
-        printf("%d :: Int\n", GetIntValue(value));
+        printf("%d\n", GetIntValue(value));
         break;
     }
 }

@@ -80,7 +80,16 @@ expADT ReadF(scannerADT scanner) {
     if (!isdigit(token[0]) && token[0] != '-')
 		return NewIdentifierExp(token);
 
+    bool neg = FALSE;
+    if (StringEqual(token, "-")) {
+        token = ReadToken(scanner);
+        neg = TRUE;
+    }
+
     int intVal = StringToInteger(token);
+
+    if (neg)
+        intVal = -intVal;
 
     return NewIntegerExp(intVal);
 }

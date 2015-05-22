@@ -58,15 +58,16 @@ valueADT Eval(expADT exp, environmentADT env)
     }
 
     case CallExp: {
-        valueADT       arg      = Eval(GetCallActualArg(exp), env);
+        expADT         arg      = GetCallActualArg(exp);
         expADT         call     = GetCallExp(exp);
         string         funcName = ExpIdentifier(call);
         valueADT       func     = GetIdentifierValue(env, funcName);
         expADT         funcExp  = GetFuncValueBody(func);
+        string         argName  = GetFuncFormalArg(funcExp);
         expADT         funcBody = GetFuncBody(funcExp);
         environmentADT closure  = GetFuncValueClosure(func);
 
-        DefineIdentifier(env, "n", NewIntegerExp(9), closure);
+        DefineIdentifier(env, argName, arg, closure);
 
         return Eval(funcBody, closure);
 
@@ -81,12 +82,26 @@ valueADT Eval(expADT exp, environmentADT env)
     }
 
     case IdentifierExp: {
-        return (GetIdentifierValue(env, ExpIdentifier(exp)));
+        string ident = ExpIdentifier(exp);
+        valueADT val = GetIdentifierValue(env, ident);
+
+        if (ValueType(val) == FuncValue) {
+            expADT         funcExp  = GetFuncValueBody(val);
+            string         argName  = GetFuncValueFormalArg(val);
+            environmentADT closure  = GetFuncValueClosure(val);
+
+            if (argName)
+                return val;
+
+            return Eval(funcExp, closure);
+        }
+
+        return val;
 
     }
 
     case CompoundExp: {
-        return (EvalCompound(exp, env));
+        return EvalCompound(exp, env);
 
     }
     }
@@ -109,17 +124,15 @@ static valueADT EvalCompound(expADT exp, environmentADT env) {
         return (rhs);
     }
 
-    lhs = Eval(ExpLHS(exp), env);
-    rhs = Eval(ExpRHS(exp), env);
+    expADT lhsExp = ExpLHS(exp);
+    expADT rhsExp = ExpRHS(exp);
+    lhs = Eval(lhsExp, env);
+    rhs = Eval(rhsExp, env);
 
     int lhv, rhv;
 
-    if (ValueType(lhs) == IntValue) lhv = GetIntValue(lhs);
-    else {
-
-    }
-
-    if (ValueType(rhs) == IntValue) rhv = GetIntValue(rhs);
+    lhv = GetIntValue(lhs);
+    rhv = GetIntValue(rhs);
 
     switch (op) {
       case '+': return NewIntegerValue(lhv + rhv);

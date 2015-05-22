@@ -9,6 +9,8 @@
 #include <stdio.h>
 
 main() {
+    printf("FML Interpreter by c0debr0 & m1ss sWaG\n\n");
+
     scannerADT scanner = NewScanner();
     SetScannerSpaceOption(scanner, IgnoreSpaces);
     environmentADT globalEnv = NewEnvironment();
@@ -18,9 +20,8 @@ main() {
     expADT swagExp = ParseExp(scanner);
     DefineIdentifier(globalEnv, "swag", swagExp, globalEnv);
 
-
     while (TRUE) {
-        printf("\n> ");
+        printf("> ");
         string s = GetLine();
 
         if (StringLength(s)==0)
@@ -37,18 +38,15 @@ main() {
         try {
             exp = ParseExp(scanner);
 
+            if (exp) {
+                valueADT val = Eval(exp, globalEnv);
+                if (val)
+                    PrintValue(val);
+            }
+
         except(ANY)
             printf("Error: %s\n", (string)GetExceptionValue());
         } endtry;
-
-        if (exp) {
-            PrintExp(exp);
-            printf("\n");
-            valueADT val = Eval(exp, globalEnv);
-            if (val)
-                PrintValue(val);
-
-        }
 
         free(s);
     }
