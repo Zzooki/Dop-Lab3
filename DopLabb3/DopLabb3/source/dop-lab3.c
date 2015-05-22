@@ -161,7 +161,17 @@ void quitCmd(string s) {
 }
 
 void swagCmd(string s) {
-	printf("swag");
+	FILE *newfile;
+	string expression, filename;
+	filename = "swagfile.txt";
+	newfile = fopen(filename, "r");
+	printf("\n");
+	if (newfile == NULL) Error("Cannot find file, please swag it again!\n");
+
+	while ((expression = ReadLine(newfile)) != NULL)
+	{
+		printf("%s\n",expression);
+	}
 }
 void typeCmd(string s){
     scannerADT scanner = NewScanner();
