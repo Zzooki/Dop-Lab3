@@ -38,10 +38,10 @@ main() {
     globalEnv = NewEnvironment();
 	initCommandTable();
 
-    string swag = "func (n) { 10*n }";
-    SetScannerString(scanner, swag);
-    expADT swagExp = ParseExp(scanner);
-    DefineIdentifier(globalEnv, "swag", swagExp, globalEnv);
+    //string swag = "func (n) { 10*n }";
+    //SetScannerString(scanner, swag);
+    //expADT swagExp = ParseExp(scanner);
+    //DefineIdentifier(globalEnv, "swag", swagExp, globalEnv);
 
     while (TRUE) {
         printf("> ");
@@ -82,11 +82,16 @@ main() {
 
 void initCommandTable(void){
 	commandTable = NewSymbolTable();
-	defineCommand("load", loadCmd);
-	defineCommand("define", defineCmd);
-	defineCommand("help", helpCmd);
-	defineCommand("quit", quitCmd);
-	defineCommand("type", typeCmd);
+    defineCommand("l", loadCmd);
+    defineCommand("load", loadCmd);
+    defineCommand("d", defineCmd);
+    defineCommand("define", defineCmd);
+    defineCommand("h", helpCmd);
+    defineCommand("help", helpCmd);
+    defineCommand("quit", quitCmd);
+    defineCommand("q", quitCmd);
+    defineCommand("type", typeCmd);
+    defineCommand("t", typeCmd);
 	defineCommand("swag", swagCmd);
 }
 void defineCommand(string cmd, commandFnT fn){
@@ -129,7 +134,24 @@ void loadCmd(string s) {
 	}
 }
 void defineCmd(string s) {
-	
+    scannerADT scanner = NewScanner();
+    SetScannerSpaceOption(scanner, IgnoreSpaces);
+    SetScannerString(scanner, s);
+
+    string ident = ReadToken(scanner);
+
+    if (isdigit(ident[0])) {
+        Error("Expected identifier");
+    }
+
+    string assign = ReadToken(scanner);
+    if (!StringEqual(assign, "="))
+        Error("Expected =");
+
+    expADT exp = ParseExp(scanner);
+
+    environmentADT ctx = NewClosure(globalEnv);
+    DefineIdentifier(globalEnv, ident, exp, ctx);
 }
 void helpCmd(string s) {
 	printf("The available commands are:\n:load\n:define\n:type\n:quit\n:swag");
@@ -144,7 +166,6 @@ void swagCmd(string s) {
 void typeCmd(string s){
     scannerADT scanner = NewScanner();
     SetScannerSpaceOption(scanner, IgnoreSpaces);
-
     SetScannerString(scanner, s);
 
     valueADT val = Eval(ParseExp(scanner), globalEnv);

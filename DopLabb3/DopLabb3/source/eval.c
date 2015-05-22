@@ -17,8 +17,12 @@ static valueADT EvalCompound(expADT exp, environmentADT env);
 
 /* Exported entries */
 
+int recursion = 0;
+
 valueADT Eval(expADT exp, environmentADT env)
 {
+    if (recursion > 1000)
+        Error("Recursion too deep.\n");
     /*
     FuncExp,
     IfExp,
@@ -69,7 +73,10 @@ valueADT Eval(expADT exp, environmentADT env)
 
         DefineIdentifier(env, argName, arg, closure);
 
-        return Eval(funcBody, closure);
+        recursion++;
+        valueADT val = Eval(funcBody, closure);
+        recursion--;
+        return val;
 
     }
 
