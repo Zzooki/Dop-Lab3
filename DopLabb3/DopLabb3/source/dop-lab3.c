@@ -27,6 +27,7 @@ void swagCmd(void);
 
 main() {
     printf("FML Interpreter by c0debr0 & m1ss sWaG\n\n");
+	printf("Type :help to get available commands!\n");
 
     scannerADT scanner = NewScanner();
     SetScannerSpaceOption(scanner, IgnoreSpaces);
@@ -110,10 +111,10 @@ void defineCmd(void){
 	printf("define");
 }
 void helpCmd(void){
-	printf("help");
+	printf("The available commands are:\n:load\n:define\n:type\n:quit\n:swag");
 }
 void quitCmd(void){
-	printf("quit");
+	exit(EXIT_SUCCESS);
 }
 
 void swagCmd(void){
