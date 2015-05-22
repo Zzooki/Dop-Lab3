@@ -230,4 +230,6 @@ typedef enum {
 void SetScannerStringOption(scannerADT scanner, stringOptionT option);
 stringOptionT GetScannerStringOption(scannerADT scanner);
 
+string GetScannerString(scannerADT scanner);
+
 #endif

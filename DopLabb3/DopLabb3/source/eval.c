@@ -21,7 +21,7 @@ int recursion = 0;
 
 valueADT Eval(expADT exp, environmentADT env)
 {
-    if (recursion > 1000)
+    if (recursion > 500)
         Error("Recursion too deep.\n");
     /*
     FuncExp,
@@ -45,7 +45,7 @@ valueADT Eval(expADT exp, environmentADT env)
         valueADT val2 = Eval(rhs, env);
 
         if (relOp == '=') {
-            if (GetIntValue(val1) == GetIntValue(val2))
+            //if (GetIntValue(val1) == GetIntValue(val2))
                 return Eval(ifPart, env);
             return Eval(elsePart, env);
         }
@@ -100,7 +100,10 @@ valueADT Eval(expADT exp, environmentADT env)
             if (argName)
                 return val;
 
-            return Eval(funcExp, closure);
+            recursion++;
+            valueADT val2 = Eval(funcExp, closure);
+            recursion--;
+            return val2;
         }
 
         return val;

@@ -76,6 +76,10 @@ void SetScannerString(scannerADT scanner, string str)
     scanner->savedToken = NULL;
 }
 
+string GetScannerString(scannerADT scanner) {
+    return scanner->str;
+}
+
 string ReadToken(scannerADT scanner)
 {
     char ch;

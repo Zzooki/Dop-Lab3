@@ -26,13 +26,14 @@ void quitCmd(void);
 void swagCmd(void);
 
 environmentADT globalEnv;
+scannerADT scanner;
 
 
 main() {
     printf("FML Interpreter by c0debr0 & m1ss sWaG\n\n");
 	printf("Type :help to get available commands!\n");
 
-    scannerADT scanner = NewScanner();
+    scanner = NewScanner();
     SetScannerSpaceOption(scanner, IgnoreSpaces);
 
     globalEnv = NewEnvironment();
@@ -70,6 +71,7 @@ main() {
 
         except(ANY)
             printf("Error: %s\n", (string)GetExceptionValue());
+        printf("Line: %s\n", GetScannerString(scanner));
         } endtry;
 
         free(s);
@@ -128,14 +130,52 @@ void loadCmd(string s) {
 	string expression;
 	newfile = fopen(s, "r");
 	if (newfile == NULL) Error("Cannot find file, please swag it again!\n");
+    string s2 = NULL;
 	while ((expression = ReadLine(newfile)) != NULL)
 	{
-		if (expression[0] != '#' && expression[0] != '\0') defineCmd(expression);
+        if (expression[0] == '#' || expression[0] == '\0') continue;
+
+        bool hasBrace = FALSE;
+        for (int i = 0; i < strlen(expression); i++) {
+            if (expression[i] == '{') {
+                hasBrace = TRUE;
+            }
+            if (expression[i] == '}') {
+                hasBrace = FALSE;
+            }
+        }
+
+        if (!hasBrace) {
+            s2 = expression;
+            defineCmd(s2);
+        }
+        else {
+            hasBrace = FALSE;
+            s2 = expression;
+            while (TRUE) {
+                expression = ReadLine(newfile);
+                if (expression[0] == '#' || expression[0] == '\0') continue;
+
+                for (int i = 0; i < strlen(expression); i++) {
+                    if (expression[i] == '}') {
+                        hasBrace = TRUE;
+                    }
+                }
+
+                s2 = Concat(Concat(s2, " "), expression);
+
+                if (hasBrace) {
+                    defineCmd(s2);
+                    break;
+
+                }
+            }
+        }
+
 	}
 }
 void defineCmd(string s) {
-    scannerADT scanner = NewScanner();
-    SetScannerSpaceOption(scanner, IgnoreSpaces);
+    printf("%s\n", s);
     SetScannerString(scanner, s);
 
     string ident = ReadToken(scanner);
@@ -174,8 +214,6 @@ void swagCmd(string s) {
 	}
 }
 void typeCmd(string s){
-    scannerADT scanner = NewScanner();
-    SetScannerSpaceOption(scanner, IgnoreSpaces);
     SetScannerString(scanner, s);
 
     valueADT val = Eval(ParseExp(scanner), globalEnv);
