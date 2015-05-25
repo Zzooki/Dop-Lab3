@@ -175,7 +175,6 @@ void loadCmd(string s) {
 	}
 }
 void defineCmd(string s) {
-    printf("%s\n", s);
     SetScannerString(scanner, s);
 
     string ident = ReadToken(scanner);

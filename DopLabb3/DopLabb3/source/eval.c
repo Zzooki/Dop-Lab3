@@ -21,8 +21,10 @@ int recursion = 0;
 
 valueADT Eval(expADT exp, environmentADT env)
 {
-    if (recursion > 500)
+    if (recursion > 500) {
+        recursion = 0;
         Error("Recursion too deep.\n");
+    }
     /*
     FuncExp,
     IfExp,
@@ -45,7 +47,7 @@ valueADT Eval(expADT exp, environmentADT env)
         valueADT val2 = Eval(rhs, env);
 
         if (relOp == '=') {
-            //if (GetIntValue(val1) == GetIntValue(val2))
+            if (GetIntValue(val1) == GetIntValue(val2))
                 return Eval(ifPart, env);
             return Eval(elsePart, env);
         }
@@ -66,12 +68,17 @@ valueADT Eval(expADT exp, environmentADT env)
         expADT         call     = GetCallExp(exp);
         string         funcName = ExpIdentifier(call);
         valueADT       func     = GetIdentifierValue(env, funcName);
-        expADT         funcExp  = GetFuncValueBody(func);
+        expADT         funcExp = GetFuncValueBody(func);
+
+        if (ExpType(funcExp) == CallExp)
+            return Eval(funcExp, env);
+
         string         argName  = GetFuncFormalArg(funcExp);
         expADT         funcBody = GetFuncBody(funcExp);
-        environmentADT closure  = GetFuncValueClosure(func);
+        environmentADT closure = NewClosure(env);// GetFuncValueClosure(func);
 
-        DefineIdentifier(env, argName, arg, closure);
+        arg = NewIntegerExp(GetIntValue(Eval(arg, closure)));
+        DefineIdentifier(closure, argName, arg, closure);
 
         recursion++;
         valueADT val = Eval(funcBody, closure);
@@ -95,7 +102,7 @@ valueADT Eval(expADT exp, environmentADT env)
         if (ValueType(val) == FuncValue) {
             expADT         funcExp  = GetFuncValueBody(val);
             string         argName  = GetFuncValueFormalArg(val);
-            environmentADT closure  = GetFuncValueClosure(val);
+            environmentADT closure = NewClosure(env);// GetFuncValueClosure(val);
 
             if (argName)
                 return val;
