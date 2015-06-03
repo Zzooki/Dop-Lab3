@@ -64,16 +64,20 @@ valueADT EvalConst(expADT exp, environmentADT env) {
 valueADT EvalIdentifier(expADT exp, environmentADT env) {
     string id = ExpIdentifier(exp);
 
-    expADT identFunc = GetFuncValueBody(GetIdentifierValue(env, id));
-    return Eval(identFunc, env);
+    valueADT ident = GetIdentifierValue(env, id);
+    environmentADT closure = GetFuncValueClosure(ident);
+    expADT identFunc = GetFuncValueBody(ident);
+    return Eval(identFunc, closure);
 }
 
 valueADT EvalIf(expADT exp, environmentADT env) {
-    expADT lhs = ExpLHS(exp);
-    expADT rhs = ExpLHS(rhs);
+    expADT lhs = GetIfLHSExpression(exp);
+    expADT rhs = GetIfRHSExpression(exp);
 
-    int lhv = Eval(lhs, env);
-    int rhv = Eval(rhs, env);
+    environmentADT closure = NewClosure(env);
+
+    int lhv = GetIntValue(Eval(lhs, closure));
+    int rhv = GetIntValue(Eval(rhs, closure));
 
     char relOp = GetIfRelOp(exp);
 
